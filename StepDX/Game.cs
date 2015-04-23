@@ -62,6 +62,8 @@ namespace StepDX
         /// </summary>
         Collision collision = new Collision();
 
+        private Microsoft.DirectX.Direct3D.Font font;
+
 
         public Game()
         {
@@ -134,6 +136,18 @@ namespace StepDX
             player.Color = Color.Transparent;
             player.Transparent = true;
             player.P = new Vector2(0.5f, 1);
+
+            font = new Microsoft.DirectX.Direct3D.Font(device,  // Device we are drawing on
+                20,         // Font height in pixels
+                0,          // Font width in pixels or zero to match height
+                FontWeight.Bold,    // Font weight (Normal, Bold, etc.)
+                0,          // mip levels (0 for default)
+                false,      // italics?
+                CharacterSet.Default,   // Character set to use
+                Precision.Default,      // The font precision, try some of them...
+                FontQuality.Default,    // Quality?
+                PitchAndFamily.FamilyDoNotCare,     // Pitch and family, we don't care
+                "Arial");               // And the name of the font
         }
 
         /// <summary>
@@ -228,6 +242,13 @@ namespace StepDX
             }
 
             player.Render(device);
+
+            String time = "Time Elapsed: " + lastTime/60000 + ":" + ((lastTime/1000)%60).ToString("D2");
+
+            font.DrawText(null,     // Because I say so
+                        time,            // Text to draw
+                        new Point(600, 10),  // Location on the display (pixels with 0,0 as upper left)
+                        Color.White);   // Font color
 
             //End the scene
             device.EndScene();
