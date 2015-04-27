@@ -19,6 +19,7 @@ namespace StepDX
             Game game = new Game();
             GameSounds gamesounds = new GameSounds(game);
             game.Show();
+            gamesounds.BGM();
             do
             {
                 game.Advance();
@@ -27,11 +28,13 @@ namespace StepDX
                 //Play sound effect
                 if (game.PlaySound() == "Polygon")
                 {
-                    gamesounds.Nah();
+                    gamesounds.CollisionEnd();
+                    gamesounds.Collision();
                 }
                 //GameOver sound
                 else if (game.PlaySound() == "GameOver")
                 {
+                    gamesounds.BGMEnd();
                     gamesounds.GameOver();
                 }
                 game.SoundStop();
