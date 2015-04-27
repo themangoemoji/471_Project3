@@ -39,7 +39,12 @@ namespace StepDX
         /// </summary>
         public virtual List<Vector2> Vertices { get { return verticesB; } }
 
+        public bool isFloor;
 
+        public Polygon()
+        {
+            isFloor = false;
+        }
         /// <summary>
         /// Add a vertex to the polygon.  Must be called before the
         /// first rendering of the polygon.

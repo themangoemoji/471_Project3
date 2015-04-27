@@ -62,6 +62,11 @@ namespace StepDX
         /// </summary>
         Collision collision = new Collision();
 
+        String time = "";
+        bool gameOver = false;
+
+        double endGameTime;
+
         private Microsoft.DirectX.Direct3D.Font font;
 
 
@@ -86,6 +91,7 @@ namespace StepDX
             lastTime = stopwatch.ElapsedMilliseconds;
 
             Polygon floor = new Polygon();
+            floor.isFloor = true;
             floor.AddVertex(new Vector2(0, 1));
             floor.AddVertex(new Vector2(playingW, 1));
             floor.AddVertex(new Vector2(playingW, 0.9f));
@@ -188,12 +194,23 @@ namespace StepDX
                         Vector2 v = player.V;
                         if (collision.N.X != 0)
                             v.X = 0;
+                        
                             
                         if (collision.N.Y != 0)
+                        {
+                            if (p.isFloor == false)
+                            {
+                                gameOver = true;
+                            }
                             player.surface = true;
                             v.Y = 0;
-                        player.V = v;
-                        player.Advance(0);
+                        }
+                        if (!gameOver)
+                        {
+                            player.V = v;
+                            player.Advance(0);
+                        }
+                        
                     }
                 }
 
@@ -242,17 +259,31 @@ namespace StepDX
             }
 
             player.Render(device);
+            
+            if (! gameOver)
+            {
+                time = "Time Elapsed: " + lastTime / 60000 + ":" + ((lastTime / 1000) % 60).ToString("D2");
+                endGameTime = ((lastTime / 1000) % 60);
+                font.DrawText(null,     // Because I say so
+                            time,            // Text to draw
+                            new Point(600, 10),  // Location on the display (pixels with 0,0 as upper left)
+                            Color.White);   // Font color
+            }
+            
+            else if (gameOver)
+            {
+                String endGame = "Game over, You scored " + endGameTime * 100 + " points.";
+                font.DrawText(null,     // Because I say so
+                endGame,            // Text to draw
+                new Point(300, 200),  // Location on the display (pixels with 0,0 as upper left)
+                Color.Red);   // Font color
 
-            String time = "Time Elapsed: " + lastTime/60000 + ":" + ((lastTime/1000)%60).ToString("D2");
-
-            font.DrawText(null,     // Because I say so
-                        time,            // Text to draw
-                        new Point(600, 10),  // Location on the display (pixels with 0,0 as upper left)
-                        Color.White);   // Font color
+            }
 
             //End the scene
             device.EndScene();
             device.Present();
+           
         }
 
         /// <summary>
