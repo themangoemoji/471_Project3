@@ -40,6 +40,18 @@ namespace StepDX
         /// </summary>
         private float maxHeight = 1;
 
+        //Define the type for sounds
+        string type;
+        public Platform()
+        {
+            type = "Platform";
+        }
+
+        public override string Type()
+        {
+            return type;
+        }
+
         /// <summary>
         /// Save the current platform position state
         /// </summary>

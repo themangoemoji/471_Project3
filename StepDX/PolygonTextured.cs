@@ -31,6 +31,18 @@ namespace StepDX
         /// </summary>
         private bool transparent = false;
 
+        //Define the type for sounds
+        string type;
+        public PolygonTextured()
+        {
+            type = "PolygonTextured";
+        }
+
+        public override string Type()
+        {
+            return type;
+        }
+
         /// <summary>
         /// Indicates if the texture is transparent
         /// </summary>

@@ -69,6 +69,10 @@ namespace StepDX
 
         private Microsoft.DirectX.Direct3D.Font font;
 
+        string sounds;
+        public string PlaySound() { return sounds; }
+        public void SoundStop() { sounds = null; }
+
 
         public Game()
         {
@@ -76,6 +80,8 @@ namespace StepDX
 
             if (!InitializeDirect3D())
                 return;
+
+            sounds = null;
 
             vertices = new VertexBuffer(typeof(CustomVertex.PositionColored), // Type of vertex
                                         4,      // How many
@@ -187,15 +193,16 @@ namespace StepDX
                 {
                     if (collision.Test(player, p))
                     {
-                        
+                        float y1 = player.P.Y;
                         float depth = collision.P1inP2 ?
                                   collision.Depth : -collision.Depth;
                         player.P = player.P + collision.N * depth;
                         Vector2 v = player.V;
+                        float y2 = player.P.Y;
                         if (collision.N.X != 0)
                             v.X = 0;
-                        
-                            
+
+
                         if (collision.N.Y != 0)
                         {
                             if (p.isFloor == false)
@@ -207,10 +214,14 @@ namespace StepDX
                         }
                         if (!gameOver)
                         {
+                            if (y1 > y2)
+                                sounds = p.Type();
+
                             player.V = v;
                             player.Advance(0);
                         }
-                        
+                        else
+                            sounds = "GameOver";
                     }
                 }
 

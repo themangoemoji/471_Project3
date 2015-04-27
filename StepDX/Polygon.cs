@@ -40,11 +40,15 @@ namespace StepDX
         public virtual List<Vector2> Vertices { get { return verticesB; } }
 
         public bool isFloor;
+        string type;
 
         public Polygon()
         {
             isFloor = false;
+            type = "Polygon";
         }
+
+        public virtual string Type() { return type; }
         /// <summary>
         /// Add a vertex to the polygon.  Must be called before the
         /// first rendering of the polygon.
