@@ -206,7 +206,7 @@ namespace StepDX
                         {
                             if (p.isFloor == false)
                             {
-                                //gameOver = true;
+                                gameOver = true;
                             }
                             player.surface = true;
                             v.Y = 0;

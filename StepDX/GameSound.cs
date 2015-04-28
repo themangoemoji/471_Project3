@@ -16,6 +16,7 @@ namespace StepDX
         private SecondaryBuffer collision = null;
         private SecondaryBuffer gameover = null;
         private SecondaryBuffer bgm = null;
+        private SecondaryBuffer fail = null;
 
         public GameSounds(Form form)
         {
@@ -25,6 +26,7 @@ namespace StepDX
             Load(ref collision, "../../Collision.wav");
             Load(ref gameover, "../../GameOver.wav");
             Load(ref bgm, "../../BGM.wav");
+            Load(ref fail, "../../Fail.wav");
         }
 
         private void Load(ref SecondaryBuffer buffer, string filename)
@@ -102,7 +104,27 @@ namespace StepDX
             if (gameover.Status.Playing)
                 gameover.Stop();
         }
-        
 
+
+        public void Fail()
+        {
+            if (fail == null)
+                return;
+
+            if (!fail.Status.Playing)
+            {
+                fail.SetCurrentPosition(0);
+                fail.Play(0, BufferPlayFlags.Default);
+            }
+        }
+
+        public void FailEnd()
+        {
+            if (fail == null)
+                return;
+
+            if (fail.Status.Playing)
+                fail.Stop();
+        }
     }
 }
