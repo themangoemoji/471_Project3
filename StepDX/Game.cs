@@ -69,9 +69,7 @@ namespace StepDX
 
         private Microsoft.DirectX.Direct3D.Font font;
 
-        string sounds;
-        public string PlaySound() { return sounds; }
-        public void SoundStop() { sounds = null; }
+        GameSounds gamesounds = null;
 
 
         public Game()
@@ -81,7 +79,8 @@ namespace StepDX
             if (!InitializeDirect3D())
                 return;
 
-            sounds = null;
+            gamesounds = new GameSounds(this);
+            gamesounds.BGM();
 
             vertices = new VertexBuffer(typeof(CustomVertex.PositionColored), // Type of vertex
                                         4,      // How many
@@ -207,21 +206,27 @@ namespace StepDX
                         {
                             if (p.isFloor == false)
                             {
-                                gameOver = true;
+                                //gameOver = true;
                             }
                             player.surface = true;
                             v.Y = 0;
                         }
                         if (!gameOver)
                         {
-                            if (y1 > y2)
-                                sounds = p.Type();
+                            if (y1 > y2 && p.Type() == "Polygon")
+                            {
+                                gamesounds.CollisionEnd();
+                                gamesounds.Collision();
+                            }
 
                             player.V = v;
                             player.Advance(0);
                         }
                         else
-                            sounds = "GameOver";
+                        {
+                            gamesounds.BGMEnd();
+                            gamesounds.GameOver();
+                        }
                     }
                 }
 
