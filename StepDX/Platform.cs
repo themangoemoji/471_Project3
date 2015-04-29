@@ -34,6 +34,7 @@ namespace StepDX
         /// Speed in meters per second
         /// </summary>
         private float speed = 5;
+        private float Maxspeed = 1;
 
         /// <summary>
         /// How high we go
@@ -99,6 +100,11 @@ namespace StepDX
                // verticesM.Add(v + new Vector2(0, h));
                 verticesM.Add(v + new Vector2(h, 0));
             }
+
+            speed = (1-dt / 100f) * speed;
+
+            if (speed <= Maxspeed)
+                speed = Maxspeed;
 
         }
 
