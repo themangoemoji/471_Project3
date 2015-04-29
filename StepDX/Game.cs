@@ -124,7 +124,9 @@ namespace StepDX
             AddObstacle(-1.1f, -1.2f, -1.3f, 3.3f, 3.5f, 3.7f, 10f);
             AddObstacle(-5.0f, -5.1f, -5.2f, 3.3f, 3.5f, 3.7f, 15f);
             AddObstacle(-3.1f, -3.2f, -3.3f, 2.3f, 2.5f, 2.7f, 5f);
-            AddObstacle(-1.5f, -1.6f, -1.7f, 1.5f, 1.7f, 1.9f, 7f);
+            //AddObstacle(-1.5f,-1.6f,-1.7f,1.5f,1.7f,1.9f,7f);
+            //Changed the first variable to -1.2 to test collision
+            AddObstacle(-1.2f, -1.6f, -1.7f, 1.5f, 1.7f, 1.9f, 7f);
             
 
             Texture spritetexture = TextureLoader.FromFile(device, "../../../guy8.bmp");
@@ -381,17 +383,17 @@ namespace StepDX
             Platform platform = new Platform();
             platform.Tex = texture;
             platform.AddVertex(new Vector2(x1, y2));
-            platform.AddTex(new Vector2(0, 0));
+            platform.AddTex(new Vector2(0, .5f));
             platform.AddVertex(new Vector2(x2, y3));
-            platform.AddTex(new Vector2(0, 1));
+            platform.AddTex(new Vector2(.5f, 1));
             platform.AddVertex(new Vector2(x3, y2));
-            platform.AddTex(new Vector2(0, 1));
+            platform.AddTex(new Vector2(1, 1));
             platform.AddVertex(new Vector2(x3, y2));
-            platform.AddTex(new Vector2(1, 0));
+            platform.AddTex(new Vector2(1, .5f));
             platform.AddVertex(new Vector2(x2, y1));
-            platform.AddTex(new Vector2(1, 1));
+            platform.AddTex(new Vector2(.5f, 0));
             platform.AddVertex(new Vector2(x1, y2));
-            platform.AddTex(new Vector2(1, 1));
+            platform.AddTex(new Vector2(1, .5f));
 
             platform.SetSpeed(speed);
             //  platform.Color = Color.CornflowerBlue;
