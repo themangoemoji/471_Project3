@@ -363,6 +363,12 @@ namespace StepDX
                 }
                
             }
+            else if (e.KeyCode == Keys.Down)
+            {
+                Vector2 v = player.V;
+                v.Y -= 1.5f;
+                player.V = v;
+            }
 
         }
 
@@ -372,6 +378,19 @@ namespace StepDX
             {
                 Vector2 v = player.V;
                 v.X = 0;
+                player.V = v;
+            }
+            else if(e.KeyCode == Keys.Down)
+            {
+                Vector2 v = player.V;
+                if( v.Y < -3 )
+                {
+                    v.Y += 1.5f;
+                }
+                else if ( v.Y < 0 )
+                {
+                    v.Y = 0;
+                }
                 player.V = v;
             }
         }
