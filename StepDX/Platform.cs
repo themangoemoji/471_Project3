@@ -8,7 +8,7 @@ using Microsoft.DirectX.Direct3D;
 
 namespace StepDX
 {
-    public class Platform : Polygon
+    public class Platform : PolygonTextured
     {
         /// <summary>
         /// Vertices after we move them
@@ -33,12 +33,12 @@ namespace StepDX
         /// <summary>
         /// Speed in meters per second
         /// </summary>
-        private float speed = 1;
+        private float speed = 5;
 
         /// <summary>
         /// How high we go
         /// </summary>
-        private float maxHeight = 1;
+        private float maxHeight = 10;
 
         //Define the type for sounds
         string type;
@@ -89,16 +89,27 @@ namespace StepDX
             }
             else
             {
-                h = 1 - maxHeight * (time - step * speed) / speed;
+                h = 10 - maxHeight * (time - step * speed) / speed;
             }
 
             // Move it
             verticesM.Clear();
             foreach (Vector2 v in verticesB)
             {
-                verticesM.Add(v + new Vector2(0, h));
+               // verticesM.Add(v + new Vector2(0, h));
+                verticesM.Add(v + new Vector2(h, 0));
             }
 
+        }
+
+        public void SetSpeed(float s)
+        {
+            speed = s;
+        }
+
+        public float GetSpeed()
+        {
+            return speed;
         }
 
 
