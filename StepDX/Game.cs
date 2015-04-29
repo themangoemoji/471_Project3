@@ -83,7 +83,7 @@ namespace StepDX
             gamesounds.BGM();
 
             vertices = new VertexBuffer(typeof(CustomVertex.PositionColored), // Type of vertex
-                                        4,      // How many
+                                        6,      // How many
                                         device, // What device
                                         0,      // No special usage
                                         CustomVertex.PositionColored.Format,
@@ -104,6 +104,7 @@ namespace StepDX
             floor.Color = Color.CornflowerBlue;
             world.Add(floor);
 
+            /*
             AddObstacle(2, 3, 1.7f, 1.9f, Color.Crimson);
             AddObstacle(4, 4.2f, 1, 2.1f, Color.Coral);
             AddObstacle(5, 6, 2.2f, 2.4f, Color.BurlyWood);
@@ -111,28 +112,22 @@ namespace StepDX
             AddObstacle(6.5f, 7.5f, 2.5f, 2.7f, Color.Chocolate);
             AddObstacle(-1, 0, 0f, playingH, Color.Crimson);
             AddObstacle(playingW, playingW + 1, 0f, playingH, Color.Crimson);
+            */
 
-            Platform platform = new Platform();
-            platform.AddVertex(new Vector2(3.2f, 2));
-            platform.AddVertex(new Vector2(3.9f, 2));
-            platform.AddVertex(new Vector2(3.9f, 1.8f));
-            platform.AddVertex(new Vector2(3.2f, 1.8f));
-            platform.Color = Color.CornflowerBlue;
-            world.Add(platform);
+            
 
-            Texture texture = TextureLoader.FromFile(device, "../../../stone08.bmp");
-            PolygonTextured pt = new PolygonTextured();
-            pt.Tex = texture;
-            pt.AddVertex(new Vector2(1.2f, 3.5f));
-            pt.AddTex(new Vector2(0, 1));
-            pt.AddVertex(new Vector2(1.9f, 3.5f));
-            pt.AddTex(new Vector2(0, 0));
-            pt.AddVertex(new Vector2(1.9f, 3.3f));
-            pt.AddTex(new Vector2(1, 0));
-            pt.AddVertex(new Vector2(1.2f, 3.3f));
-            pt.AddTex(new Vector2(1, 1));
-            pt.Color = Color.Transparent;
-            world.Add(pt);
+           
+            // Add obstacles
+            AddObstacle(3.2f, 3.3f, 3.4f, 1.8f, 2.0f, 2.2f, 20f);
+            AddObstacle(1.1f, 1.2f, 1.3f, 3.3f, 3.5f,3.7f,15f);
+            AddObstacle(0.5f, 0.6f, 0.7f, 1.5f, 1.7f, 1.9f, 5f);
+            AddObstacle(-1.1f, -1.2f, -1.3f, 3.3f, 3.5f, 3.7f, 10f);
+            AddObstacle(-5.0f, -5.1f, -5.2f, 3.3f, 3.5f, 3.7f, 15f);
+            AddObstacle(-3.1f, -3.2f, -3.3f, 2.3f, 2.5f, 2.7f, 5f);
+            //AddObstacle(-1.5f,-1.6f,-1.7f,1.5f,1.7f,1.9f,7f);
+            //Changed the first variable to -1.2 to test collision
+            AddObstacle(-1.2f, -1.6f, -1.7f, 1.5f, 1.7f, 1.9f, 7f);
+            
 
             Texture spritetexture = TextureLoader.FromFile(device, "../../../guy8.bmp");
             player.Tex = spritetexture;
@@ -284,6 +279,21 @@ namespace StepDX
                             time,            // Text to draw
                             new Point(600, 10),  // Location on the display (pixels with 0,0 as upper left)
                             Color.White);   // Font color
+
+
+
+
+                /*
+                if((lastTime / 1000) % 60 > 10)
+                {
+                    foreach(Platform p in world)
+                    {
+                        p.SetSpeed(p.GetSpeed() - 1f);
+                      
+                    }
+
+                }
+                 * */
             }
             
             else if (gameOver)
@@ -385,15 +395,29 @@ namespace StepDX
             }
         }
 
-        private void AddObstacle(float left, float right, float bottom, float top, Color color)
+        private void AddObstacle(float x1, float x2, float x3, float y1, float y2, float y3, float speed)
         {
-            Polygon p = new Polygon();
-            p.AddVertex(new Vector2(left, bottom));
-            p.AddVertex(new Vector2(left, top));
-            p.AddVertex(new Vector2(right, top));
-            p.AddVertex(new Vector2(right, bottom));
-            p.Color = color;
-            world.Add(p);
+
+            Texture texture = TextureLoader.FromFile(device, "../../../stone08.bmp");
+            Platform platform = new Platform();
+            platform.Tex = texture;
+            platform.AddVertex(new Vector2(x1, y2));
+            platform.AddTex(new Vector2(0, .5f));
+            platform.AddVertex(new Vector2(x2, y3));
+            platform.AddTex(new Vector2(.5f, 1));
+            platform.AddVertex(new Vector2(x3, y2));
+            platform.AddTex(new Vector2(1, 1));
+            platform.AddVertex(new Vector2(x3, y2));
+            platform.AddTex(new Vector2(1, .5f));
+            platform.AddVertex(new Vector2(x2, y1));
+            platform.AddTex(new Vector2(.5f, 0));
+            platform.AddVertex(new Vector2(x1, y2));
+            platform.AddTex(new Vector2(1, .5f));
+
+            platform.SetSpeed(speed);
+            //  platform.Color = Color.CornflowerBlue;
+            platform.Color = Color.Transparent;
+            world.Add(platform);
         }
 
     }
