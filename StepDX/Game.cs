@@ -99,8 +99,8 @@ namespace StepDX
             floor.isFloor = true;
             floor.AddVertex(new Vector2(0, 1));
             floor.AddVertex(new Vector2(playingW, 1));
-            floor.AddVertex(new Vector2(playingW, 0.9f));
-            floor.AddVertex(new Vector2(0, 0.9f));
+            floor.AddVertex(new Vector2(playingW, 0.7f));
+            floor.AddVertex(new Vector2(0, 0.7f));
             floor.Color = Color.CornflowerBlue;
             world.Add(floor);
 
