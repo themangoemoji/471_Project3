@@ -71,7 +71,6 @@ namespace StepDX
 
         GameSounds gamesounds = null;
 
-
         public Game()
         {
             InitializeComponent();
@@ -144,7 +143,7 @@ namespace StepDX
             player.P = new Vector2(0.5f, 1);
 
             font = new Microsoft.DirectX.Direct3D.Font(device,  // Device we are drawing on
-                20,         // Font height in pixels
+                25,         // Font height in pixels
                 0,          // Font width in pixels or zero to match height
                 FontWeight.Bold,    // Font weight (Normal, Bold, etc.)
                 0,          // mip levels (0 for default)
@@ -264,20 +263,22 @@ namespace StepDX
             // Render the background
             background.Render();
 
-            foreach (Polygon p in world)
-            {
-                p.Render(device);
-            }
-
-            player.Render(device);
+            
             
             if (! gameOver)
             {
+                foreach (Polygon p in world)
+                {
+                    p.Render(device);
+                }
+
+                player.Render(device);
+
                 time = "Time Elapsed: " + lastTime / 60000 + ":" + ((lastTime / 1000) % 60).ToString("D2");
                 endGameTime = ((lastTime / 1000) % 60);
                 font.DrawText(null,     // Because I say so
                             time,            // Text to draw
-                            new Point(600, 10),  // Location on the display (pixels with 0,0 as upper left)
+                            new Point(500, 10),  // Location on the display (pixels with 0,0 as upper left)
                             Color.White);   // Font color
 
 
@@ -301,8 +302,8 @@ namespace StepDX
                 String endGame = "Game over, You scored " + endGameTime * 100 + " points.";
                 font.DrawText(null,     // Because I say so
                 endGame,            // Text to draw
-                new Point(300, 200),  // Location on the display (pixels with 0,0 as upper left)
-                Color.Red);   // Font color
+                new Point(220, 170),  // Location on the display (pixels with 0,0 as upper left)
+                Color.AntiqueWhite);   // Font color
 
             }
 
@@ -366,7 +367,7 @@ namespace StepDX
             else if (e.KeyCode == Keys.Down)
             {
                 Vector2 v = player.V;
-                v.Y -= 1.5f;
+                v.Y -= 3.0f;
                 player.V = v;
             }
 
@@ -385,7 +386,7 @@ namespace StepDX
                 Vector2 v = player.V;
                 if( v.Y < -3 )
                 {
-                    v.Y += 1.5f;
+                    v.Y += 3.0f;
                 }
                 else if ( v.Y < 0 )
                 {
