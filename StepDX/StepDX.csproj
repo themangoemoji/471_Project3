@@ -146,8 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="4k_example.jpg" />
+    <Content Include="bikini.bmp" />
     <Content Include="guy8.bmp" />
     <Content Include="mars.bmp" />
+    <Content Include="spongebob.bmp" />
     <Content Include="stone08.bmp" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32ABC804-09BE-4372-96B6-B1CC7D0CCAFF}"
 	ProjectSection(SolutionItems) = preProject
 		StepDX\4k_example.jpg = StepDX\4k_example.jpg
+		StepDX\bikini.bmp = StepDX\bikini.bmp
 	EndProjectSection
 EndProject
 Global

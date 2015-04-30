@@ -101,7 +101,7 @@ namespace StepDX
             floor.AddVertex(new Vector2(playingW, 1));
             floor.AddVertex(new Vector2(playingW, 0.7f));
             floor.AddVertex(new Vector2(0, 0.7f));
-            floor.Color = Color.CornflowerBlue;
+            floor.Color = Color.White;
             world.Add(floor);
 
             /*
